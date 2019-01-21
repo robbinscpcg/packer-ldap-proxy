@@ -1,6 +1,6 @@
 # Colibri Group LDAP Proxy Packer Image
 
-This repository hosts a Packer image defintion for the Colibri Group LDAP Proxy.  The LDAP Proxy implements (Duo Authentication Proxy)[https://duo.com/docs/authproxy_reference] along with necessary configuration required for use.   
+This repository hosts a Packer image defintion for the Colibri Group LDAP Proxy.  The LDAP Proxy implements [Duo Authentication Proxy](https://duo.com/docs/authproxy_reference) along with necessary configuration required for use.   
 
 ## Building LDAP Proxy Image
 
