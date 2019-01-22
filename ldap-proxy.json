@@ -1,19 +1,13 @@
 {
   "variables": {
     "region": "us-east-1",
-    "integration_key": "lulzkey9000",
-    "secret_key": "101010101010",
-    "api_host": "api.duo-security.com",
-    "host1": "10.0.0.1",
-    "host2": "10.0.0.2",
-    "service_account_user": "administrator",
-    "service_account_pass": "Password01!",
-    "search_dn": "DC=robbinscs,DC=net"
+    "packer_profile": "packer"
   },
   "builders": [{
-    "ami_name": "colibri-ldap-proxy-{{isotime | clean_ami_name}}",
+    "ami_name": "colibri-ldap-proxy-{{timestamp | clean_ami_name}}",
     "ami_description": "Windows Server 2016 AMI with Duo LDAP Proxy installed/configured",
     "instance_type": "t2.micro",
+    "iam_instance_profile": "{{user `packer_profile`}}",
     "region": "{{user `region`}}", 
     "source_ami": "ami-01945499792201081",
     "type": "amazon-ebs",
@@ -38,20 +32,6 @@
   {
     "type": "powershell",
     "inline": [ "move c:\\build\\AWS.EC2.Windows.CloudWatch.json 'C:\\Program Files\\Amazon\\SSM\\Plugins\\awsCloudWatch\\'" ]
-  },
-  {
-    "type": "powershell",
-    "environment_vars": [
-      "IKEY={{user `integration_key`}}",
-      "SKEY={{user `secret_key`}}",
-      "API_HOST={{user `api_host`}}",
-      "HOST1={{user `host1`}}",
-      "HOST2={{user `host2`}}",
-      "SERVICE_ACCOUNT_USER={{user `service_account_user`}}",
-      "SERVICE_ACCOUNT_PASS={{user `service_account_pass`}}",
-      "SEARCHDN={{user `search_dn`}}"
-    ],
-    "script": "build/set_proxy_vars.ps1"
   },
   {
     "type": "powershell",

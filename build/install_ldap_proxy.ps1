@@ -8,6 +8,14 @@ Start-Process "C:\build\duoauthproxy-2.12.0.exe" -argumentlist "/S" -wait
 # Stop Duo LDAP Proxy to deploy configuration file
 Stop-Service DuoAuthProxy
 
+# Execute update of variables from AWS Secrets Manager
+set +x
+$ldap_settings  = (Get-SECSecretValue -SecretId 'ldap-proxy-prod-secrets').SecretString | ConvertFrom-Json
+$current_settings = @("HOST1", "HOST2", "SERVICE_ACCOUNT_USERNAME", "SERVICE_ACCOUNT_PASSWORD", "SEARCH_DN", "INTEGRATION_KEY", "SECRET_KEY", "API_HOST", "EXEMPT_OU_1")
+foreach ($setting in $current_settings){
+  (Get-Content "C:\build\authproxy.cfg").replace($setting, $ldap_settings.$setting) | Set-Content C:\Build\authproxy.cfg
+}
+
 # Add authproxy.cfg to correct path
 Copy-Item -Path C:\build\authproxy.cfg -Destination "C:\Program Files (x86)\Duo Security Authentication Proxy\conf"
 
