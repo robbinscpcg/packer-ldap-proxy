@@ -8,8 +8,8 @@ This repository hosts a Packer image defintion for the Colibri Group LDAP Proxy.
     ```
     packer validate
     ```
-1.  Run the build
+1.  Run the build.  Ensure that a role that has Secrets Manager access is specified on the command-line.  
     ```
-    packer build ldap-proxy.json
+    packer build -var packer_profile='Packer_Build_Role' ldap-proxy.json
     ```
 1.  If necessary, deploy the new AMI in the AWS Console or via the AWS CLI to validate functionality. 
