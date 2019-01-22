@@ -4,7 +4,7 @@
     "packer_profile": "packer"
   },
   "builders": [{
-    "ami_name": "colibri-ldap-proxy-{{timestamp | clean_ami_name}}",
+    "ami_name": "colibri-windows-2016-ldap-proxy-prod-{{timestamp | clean_ami_name}}",
     "ami_description": "Windows Server 2016 AMI with Duo LDAP Proxy installed/configured",
     "instance_type": "t2.micro",
     "iam_instance_profile": "{{user `packer_profile`}}",

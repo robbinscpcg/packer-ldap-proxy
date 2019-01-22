@@ -8,7 +8,7 @@ This repository hosts a Packer image defintion for the Colibri Group LDAP Proxy.
     ```
     packer validate
     ```
-1.  Run the build.  Ensure that a role that has Secrets Manager access is specified on the command-line.  
+1.  Run the build.  Ensure that a role that has Secrets Manager access is specified on the command-line by specifying it as an additional variable.    
     ```
     packer build -var packer_profile='Packer_Build_Role' ldap-proxy.json
     ```
